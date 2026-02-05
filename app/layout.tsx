@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-// 👉 IMPORTA O BOTÃO
+// 👉 BOTÃO WHATSAPP
 import { WhatsAppFloat } from "@/components/landing/whatsapp-float"
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -36,17 +36,36 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="pt-BR">
+      <head>
+        {/* 👉 GOOGLE ADS TAG */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17933857242"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-17933857242');
+            `,
+          }}
+        />
+      </head>
+
       <body className="font-sans antialiased">
         {children}
 
         {/* 👉 BOTÃO WHATSAPP FLUTUANTE */}
         <WhatsAppFloat />
 
+        {/* 👉 ANALYTICS VERCEL */}
         <Analytics />
       </body>
     </html>
