@@ -1,7 +1,7 @@
 "use client"
 
 export function WhatsAppFloat() {
-  const phone = "5511999999999" 
+  const phone = "5511930860533" 
   // 🔴 TROQUE para o seu número real (ex: 5511987654321)
 
   const message = encodeURIComponent(
