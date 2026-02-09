@@ -1,4 +1,4 @@
-import { Check, Star } from "lucide-react"
+import { Check, Star, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -7,41 +7,44 @@ const plans = [
   {
     name: "Individual",
     licenses: 1,
-    price: 99,
-    featured: false,
-    checkoutUrl: "https://pay.kirvano.com/4c019d63-13d4-45ec-9d71-795ab5b9a526"
+    price: 49,
+    originalPrice: 99,
+    featured: true,
+    highlight: "Oferta de lançamento",
+    checkoutUrl: "https://pay.kirvano.com/4c019d63-13d4-45ec-9d71-795ab5b9a526",
   },
   {
     name: "Escritório Small",
     licenses: 3,
-    price: 249,
+    price: 199,
     originalPrice: 297,
     featured: false,
-    checkoutUrl: "https://pay.kirvano.com/bb91bfa3-2877-48f9-bfcf-b9389dd9a3b1"
+    checkoutUrl: "https://pay.kirvano.com/bb91bfa3-2877-48f9-bfcf-b9389dd9a3b1",
   },
   {
     name: "Escritório Pro",
     licenses: 5,
-    price: 379,
+    price: 349,
     originalPrice: 495,
-    featured: true,
-    checkoutUrl: "https://pay.kirvano.com/ac04d160-79d7-4070-8b85-f51bb65d1bc9"
+    featured: false,
+    checkoutUrl: "https://pay.kirvano.com/ac04d160-79d7-4070-8b85-f51bb65d1bc9",
   },
   {
     name: "Corporativo",
     licenses: 10,
-    price: 500,
+    price: 499,
     originalPrice: 990,
     featured: false,
-    checkoutUrl: "https://pay.kirvano.com/67de4383-8119-4c16-8e5b-6941f2e56db0"
-  }
+    checkoutUrl: "https://pay.kirvano.com/67de4383-8119-4c16-8e5b-6941f2e56db0",
+  },
 ]
 
 const features = [
   "Licença vitalícia",
   "Atualizações incluídas",
   "Sem mensalidade",
-  "Ativação simples por chave"
+  "Ativação simples por chave",
+  "Download imediato após a compra",
 ]
 
 export function Pricing() {
@@ -49,11 +52,11 @@ export function Pricing() {
     <section id="planos" className="scroll-mt-20 py-16 md:py-24 bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl text-balance">
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
             Escolha seu plano
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
-            Investimento único, sem mensalidades. Economize tempo todos os meses.
+            Pague uma única vez e automatize o download de NFS-e todos os meses.
           </p>
         </div>
 
@@ -63,18 +66,18 @@ export function Pricing() {
               key={plan.name}
               className={`relative flex flex-col ${
                 plan.featured
-                  ? "border-primary bg-card shadow-lg shadow-primary/10"
+                  ? "border-primary bg-card shadow-lg shadow-primary/20 scale-[1.03]"
                   : "border-border/50 bg-card/50"
               }`}
             >
               {plan.featured && (
                 <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground">
                   <Star className="mr-1 h-3 w-3" />
-                  Mais popular
+                  {plan.highlight}
                 </Badge>
               )}
 
-              <CardHeader className="pb-4">
+              <CardHeader className="pb-4 text-center">
                 <h3 className="text-lg font-semibold text-foreground">
                   {plan.name}
                 </h3>
@@ -85,13 +88,13 @@ export function Pricing() {
               </CardHeader>
 
               <CardContent className="flex-1 pb-4">
-                <div className="mb-4">
+                <div className="mb-6 text-center">
                   {plan.originalPrice && (
                     <span className="text-sm text-muted-foreground line-through">
                       R$ {plan.originalPrice}
                     </span>
                   )}
-                  <div className="flex items-baseline gap-1">
+                  <div className="flex items-baseline justify-center gap-1">
                     <span className="text-sm text-muted-foreground">R$</span>
                     <span className="text-4xl font-bold text-foreground">
                       {plan.price}
@@ -118,7 +121,8 @@ export function Pricing() {
               <CardFooter>
                 <Button
                   asChild
-                  className="w-full"
+                  size="lg"
+                  className="w-full font-semibold"
                   variant={plan.featured ? "default" : "outline"}
                 >
                   <a
@@ -126,6 +130,7 @@ export function Pricing() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
+                    <Zap className="mr-2 h-4 w-4" />
                     Comprar agora
                   </a>
                 </Button>
